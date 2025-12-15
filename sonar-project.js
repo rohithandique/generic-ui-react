@@ -4,7 +4,7 @@ sonarqubeScanner({
   serverUrl: 'https://sonarcloud.io',
   options: {
     'sonar.organization': 'rohithandique',
-    'sonar.projectKey': 'rohithandique_generic-server-spring-boot',
+    'sonar.projectKey': 'rohithandique_generic-ui-react',
     'sonar.sources': 'src',
     'sonar.tests': 'src',
     'sonar.inclusions': '**/*.ts,**/*.tsx',
