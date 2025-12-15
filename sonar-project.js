@@ -8,7 +8,7 @@ sonarqubeScanner({
     'sonar.test.inclusions': 'src/**/*.test.ts,src/**/*.test.tsx',
     'sonar.coverage.exclusions': [
       'sonar-project.js',
-      'src/**/*.test.tsx',
+      'src/**/*.test.*', 
       'src/main.tsx'
     ].join(','),
     'sonar.exclusions': [
