@@ -2,7 +2,7 @@ FROM node:20 AS build
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --ignore-scripts
 COPY src/ ./src/
 COPY index.html vite.config.ts tsconfig*.json eslint.config.js ./
 RUN npm run build
