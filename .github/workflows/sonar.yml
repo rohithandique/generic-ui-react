@@ -1,0 +1,46 @@
+name: Sonar Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  sonarcloud_scan:
+    name: Build, Test and Analyze
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # Fetch depth 0 is crucial for SonarCloud to analyze all code history
+          # and correctly compute 'New Code' metrics, especially for PRs.
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests and generate coverage
+        run: npm test
+
+      - name: Run SonarCloud Analysis
+        # This command runs the sonar-scanner executable from the sonarqube-scanner package.
+        # The configuration is taken from sonar-project.js
+        run: npm exec sonar-scanner
+        env:
+          # The SONAR_TOKEN is needed for authentication with SonarCloud.
+          # It should be stored as a secret in your GitHub repository.
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          # The SONAR_HOST_URL is required by the scanner.
+          SONAR_HOST_URL: https://sonarcloud.io
