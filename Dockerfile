@@ -3,7 +3,9 @@ FROM node:20 AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY . .
+COPY src/ ./src/
+COPY public/ ./public/
+COPY index.html vite.config.ts tsconfig*.json eslint.config.js ./
 RUN npm run build
 
 FROM nginx:alpine
