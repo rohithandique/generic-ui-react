@@ -36,8 +36,11 @@ jobs:
 
       - name: Run SonarCloud Analysis
         # This command runs the sonar-scanner executable from the sonarqube-scanner package.
-        # The configuration is taken from sonar-project.js
-        run: npm exec sonar-scanner
+        # It passes organization and project key from secrets to ensure they are always correctly set.
+        run: >
+          npm exec sonar-scanner --
+          -Dsonar.organization=rohithandique
+          -Dsonar.projectKey=rohithandique_generic-ui-react
         env:
           # The SONAR_TOKEN is needed for authentication with SonarCloud.
           # It should be stored as a secret in your GitHub repository.
