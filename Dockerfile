@@ -9,6 +9,10 @@ RUN npm run build
 
 FROM nginx:alpine
 
+RUN chown -R nginx:nginx /var/cache/nginx && \
+    chown -R nginx:nginx /var/run && \
+    chown -R nginx:nginx /var/log/nginx && \
+    chown -R nginx:nginx /run
 # Copy the built application from the 'build' stage
 COPY --from=build /app/dist /usr/share/nginx/html
 
@@ -18,7 +22,6 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Expose the non-privileged port
 EXPOSE 8080
 
-# Switch to the non-root user
 USER nginx
 
 # Start nginx
