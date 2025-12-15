@@ -4,7 +4,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY src/ ./src/
-COPY public/ ./public/
 COPY index.html vite.config.ts tsconfig*.json eslint.config.js ./
 RUN npm run build
 
