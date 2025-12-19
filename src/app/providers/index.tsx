@@ -1,5 +1,6 @@
 // src/app/providers/index.ts
 import { ComponentType } from 'react';
+import { withMantine } from './with-mantine';
 import { withRouter } from './with-router';
 
 type HOC = (component: ComponentType<any>) => ComponentType<any>;
@@ -10,4 +11,4 @@ const compose = (...hocs: HOC[]) => {
   };
 };
 
-export const withProviders = compose(withRouter);
+export const withProviders = compose(withMantine, withRouter);
