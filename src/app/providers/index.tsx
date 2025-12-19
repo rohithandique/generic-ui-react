@@ -1,6 +1,7 @@
 // src/app/providers/index.ts
 import { ComponentType } from 'react';
 import { withRouter } from './with-router';
+import { withRadix } from './with-radix';
 
 type HOC = (component: ComponentType<any>) => ComponentType<any>;
 
@@ -10,4 +11,4 @@ const compose = (...hocs: HOC[]) => {
   };
 };
 
-export const withProviders = compose(withRouter);
+export const withProviders = compose(withRadix, withRouter);
