@@ -1,6 +1,8 @@
-import { Button, rem, Group, Box } from '@mantine/core';
+import { rem, Group, Box } from '@mantine/core';
 import AppTitle from '@/shared/ui/AppTitle';
 import { useLocation } from '@tanstack/react-router';
+import { SignInModal } from '@/features/SignInModal';
+import { UserCard } from '@/entities/UserCard';
 
 export function Header() {
   const SIDEBAR_WIDTH = rem(300);
@@ -26,16 +28,16 @@ export function Header() {
         </Group>
         <Group justify="space-between" px="xl" style={{ flex: 1 }}>
           <Box> {location.pathname == '/' && <AppTitle />}</Box>
-          <Button variant="default">Sign In</Button>
+          <SignInModal />
         </Group>
         <Group
           w={SIDEBAR_WIDTH}
-          px="xl"
-          gap="xs"
           style={{
             borderLeft: `${rem(1)} solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-4))`,
           }}
-        ></Group>
+        >
+          <UserCard />
+        </Group>
       </Group>
     </Box>
   );

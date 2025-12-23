@@ -11,3 +11,9 @@
 body {
   background-color: var(--mantine-color-body);
 }
+
+.unstyled-link {
+  text-decoration: none;
+  color: inherit;
+  display: contents; /* Makes the link "invisible" to the layout */
+}
