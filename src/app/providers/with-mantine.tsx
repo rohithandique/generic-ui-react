@@ -7,6 +7,8 @@ import '@fontsource/geist-mono';
 
 import '@mantine/core/styles.css';
 import '@app/styles/index.css';
+import '@mantine/notifications/styles.css';
+import { Notifications } from '@mantine/notifications';
 
 const theme = createTheme({
   fontFamily: 'Geist, sans-serif',
@@ -54,6 +56,7 @@ const theme = createTheme({
 export const withMantine = (Component: ComponentType) => {
   return (props: any) => (
     <MantineProvider defaultColorScheme="dark" theme={theme}>
+      <Notifications />
       <Component {...props} />
     </MantineProvider>
   );

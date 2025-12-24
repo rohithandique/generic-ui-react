@@ -48,7 +48,7 @@ export function SignInModal() {
   };
 
   if (user) {
-    if (location.pathname === '/') {
+    if (location.pathname !== '/dashboard') {
       return (
         <Button
           variant="filled"
