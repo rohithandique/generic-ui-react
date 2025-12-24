@@ -31,27 +31,22 @@ export function NotFoundPage() {
         }}
       >
         <Box style={{ position: 'relative' }}>
-          {/* Background Illustration */}
           <Illustration
             style={{
               position: 'absolute',
               inset: 0,
               opacity: 0.75,
-              // Uses Mantine's CSS variables for light/dark mode compatibility
+
               color:
                 'light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))',
             }}
           />
 
-          {/* Foreground Content */}
           <Box
-            style={(theme) => ({
+            style={() => ({
               paddingTop: rem(220),
               position: 'relative',
               zIndex: 1,
-              [`@media (max-width: ${theme.breakpoints.sm})`]: {
-                paddingTop: rem(120),
-              },
             })}
           >
             <Title
@@ -60,9 +55,6 @@ export function NotFoundPage() {
                 textAlign: 'center',
                 fontWeight: 500,
                 fontSize: rem(38),
-                [`@media (max-width: ${theme.breakpoints.sm})`]: {
-                  fontSize: rem(32),
-                },
               })}
             >
               Nothing to see here

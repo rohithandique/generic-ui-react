@@ -1,16 +1,17 @@
-// src/app/providers/with-router.tsx
-import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { routeTree } from '../../routeTree.gen';
-import { ComponentType } from 'react';
-import { NotFoundPage } from '@/pages/not-found';
-
-const router = createRouter({
-  routeTree,
-  defaultNotFoundComponent: () => {
-    return <NotFoundPage />;
-  },
-});
-
-export const withRouter = (_Component: ComponentType) => {
-  return () => <RouterProvider router={router} />;
+import { RouterProvider } from '@tanstack/react-router';
+import { router } from '../router';
+import { useAuth } from './auth-context';
+export const withRouter = (_Component: React.ComponentType) => {
+  return function WithRouterWrapper() {
+    const auth = useAuth();
+    if (auth.isLoading) {
+      return null;
+    }
+    return (
+      <RouterProvider
+        router={router}
+        context={{ auth }} // This passes auth to all routes
+      />
+    );
+  };
 };

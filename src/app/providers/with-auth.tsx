@@ -1,5 +1,5 @@
 import { ComponentType } from 'react';
-import { AuthProvider } from './auth-context';
+import { AuthProvider } from './auth-provider';
 
 export const withAuth = (Component: ComponentType) => {
   const WrappedComponent = (props: any) => (
