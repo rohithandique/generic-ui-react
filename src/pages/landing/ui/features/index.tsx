@@ -71,10 +71,6 @@ export function Features() {
         style={{
           fontSize: rem(34),
           fontWeight: 500,
-          // Responsive font size using standard CSS logic
-          '@media (max-width: 48em)': {
-            fontSize: rem(24),
-          },
         }}
       >
         Integrate effortlessly with any technology stack

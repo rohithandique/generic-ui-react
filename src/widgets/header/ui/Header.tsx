@@ -36,7 +36,7 @@ export function Header() {
             borderLeft: `${rem(1)} solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-4))`,
           }}
         >
-          <UserCard />
+          {location.pathname != '/' && <UserCard />}
         </Group>
       </Group>
     </Box>

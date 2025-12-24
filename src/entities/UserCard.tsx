@@ -1,6 +1,9 @@
+import { useAuth } from '@/app/providers/auth-context';
 import { Box, Group, MantineTheme, UnstyledButton, Text } from '@mantine/core';
 
 export function UserCard() {
+  const { user, isLoading } = useAuth();
+
   return (
     <UnstyledButton
       p="md"
@@ -13,10 +16,10 @@ export function UserCard() {
       <Group>
         <Box style={{ flex: 1 }}>
           <Text size="sm" fw={500}>
-            Rohit Handique
+            {!isLoading && user ? user.user_metadata.name : ''}
           </Text>
           <Text c="dimmed" size="xs">
-            rohit.handique@gmail.com
+            {!isLoading && user ? user.email : ''}
           </Text>
         </Box>
       </Group>

@@ -2,6 +2,7 @@
 import { ComponentType } from 'react';
 import { withMantine } from './with-mantine';
 import { withRouter } from './with-router';
+import { withAuth } from './with-auth';
 
 type HOC = (component: ComponentType<any>) => ComponentType<any>;
 
@@ -11,4 +12,4 @@ const compose = (...hocs: HOC[]) => {
   };
 };
 
-export const withProviders = compose(withMantine, withRouter);
+export const withProviders = compose(withMantine, withAuth, withRouter);

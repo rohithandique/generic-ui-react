@@ -1,8 +1,5 @@
 import { ActionIcon, Anchor, Group, Container, rem, Box } from '@mantine/core';
 
-import AppTitle from '@/shared/ui/AppTitle';
-import { useLocation } from '@tanstack/react-router';
-import { UserCard } from '@/entities/UserCard';
 const links = [
   { link: '#', label: 'Contact' },
   { link: '#', label: 'Privacy' },
@@ -25,7 +22,6 @@ export function Footer() {
     </Anchor>
   ));
   const SIDEBAR_WIDTH = rem(300);
-  const location = useLocation();
   return (
     <Box
       component="header"
@@ -42,9 +38,7 @@ export function Footer() {
           style={{
             borderRight: `${rem(1)} solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-4))`,
           }}
-        >
-          {location.pathname != '/' && <AppTitle />}
-        </Group>
+        ></Group>
         <Group justify="space-between" px="xl" style={{ flex: 1 }}>
           <Box
             component="footer"

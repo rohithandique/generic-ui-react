@@ -13,19 +13,57 @@ import {
   Button,
   Flex,
   Group,
+  Loader,
 } from '@mantine/core';
-import { useNavigate } from '@tanstack/react-router';
+import { useLocation, useNavigate } from '@tanstack/react-router';
+import { useAuth } from '@/app/providers/auth-context';
+import { authAdapter } from '@/shared/api/auth';
 
 export function SignInModal() {
   const [opened, { open, close }] = useDisclosure(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const { user, isLoading, setIsLoading } = useAuth();
   const modalContentHeight = rem(550);
 
-  const mockLogin = () => {
-    close();
-    navigate({ to: '/dashboard' });
+  const handleGoogleLogin = async () => {
+    try {
+      setIsLoading(true);
+      await authAdapter.loginWithGoogle();
+      close();
+    } catch (err) {
+      console.error('Google Login failed', err);
+    }
   };
+
+  const handleLogout = async () => {
+    try {
+      setIsLoading(true);
+      navigate({ to: '/', replace: false });
+      await authAdapter.logout();
+    } catch (err) {
+      console.error('Logout failed', err);
+    }
+  };
+
+  if (user) {
+    if (location.pathname === '/') {
+      return (
+        <Button
+          variant="filled"
+          onClick={() => navigate({ to: '/dashboard', replace: false })}
+        >
+          {isLoading ? <Loader size={'xs'} /> : 'Go to Dashboard'}
+        </Button>
+      );
+    }
+    return (
+      <Button variant="outline" onClick={() => handleLogout()}>
+        Logout
+      </Button>
+    );
+  }
 
   return (
     <>
@@ -115,9 +153,10 @@ export function SignInModal() {
               mt="xl"
               size="md"
               radius="md"
-              onClick={() => mockLogin()}
+              loading={isLoading} // Show loading state if auth is initializing
+              onClick={handleGoogleLogin} // Call t
             >
-              Login
+              Continue with Google{' '}
             </Button>
 
             <Text ta="center" mt="md" size="sm">
@@ -147,7 +186,7 @@ export function SignInModal() {
       </Modal>
 
       <Button variant="default" onClick={open}>
-        Sign In
+        {isLoading ? <Loader size={'xs'} /> : 'Sign In'}
       </Button>
     </>
   );
